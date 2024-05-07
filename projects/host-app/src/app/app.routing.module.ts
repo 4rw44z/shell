@@ -8,9 +8,7 @@ import { TodoComponent } from './todo/todo.component';
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
-  {path: 'todo-list', component: TodoComponent}
-];
-
+  {path: 'todo-list', component: TodoComponent}];
 @NgModule({
   declarations: [],
   imports: [
