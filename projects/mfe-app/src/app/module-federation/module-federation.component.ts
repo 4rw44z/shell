@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../../../host-app/src/app/services/data.service';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
-
+import { MfSharedService } from 'mf-shared'
 @Component({
   selector: 'app-module-federation',
   standalone: true,
@@ -15,7 +15,7 @@ export class ModuleFederationComponent implements OnInit{
   isUserLoggedIn: boolean = false;
   themeData = {};
   private subscription = new Subscription();
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, private sharedService: MfSharedService) {
   }
   ngOnInit(): void {
     this.checkLoggedInUser();
@@ -23,7 +23,7 @@ export class ModuleFederationComponent implements OnInit{
   }
   checkServiceData() {
     this.subscription.add(
-      this.dataService.themeDataAsObservable.subscribe((theme) => {
+      this.sharedService.themeDataAsObservable.subscribe((theme) => {
         this.themeData = theme
         console.log(theme);
       })

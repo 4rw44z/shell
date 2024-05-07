@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { DataService } from '../services/data.service';
 import { CommonModule } from '@angular/common';
+import { MfSharedService } from 'mf-shared'
 
 @Component({
   selector: 'app-home',
@@ -14,17 +15,21 @@ export class HomeComponent implements OnInit{
   loggedInUser: string = '';
   subsription = new Subscription();
   themeData = null;
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, private sharedService: MfSharedService) {
   }
   ngOnInit(): void {
     this.checkLoggedInUser();
     this.checkTheme();
   }
   checkTheme() {
-    this.subsription.add(this.dataService.themeDataAsObservable.subscribe(theme => {
+    // this.subsription.add(this.dataService.themeDataAsObservable.subscribe(theme => {
+    //   this.themeData = theme;
+    // }))
+    this.subsription.add(this.sharedService.themeDataAsObservable.subscribe(theme => {
       this.themeData = theme;
     }))
   }
+
   setLoggedInUser() {
     this.loggedInUser = 'Paul';
     console.log('Logged in user:', this.loggedInUser);
@@ -39,6 +44,6 @@ export class HomeComponent implements OnInit{
   }
   updateTheme() {
     let updateThemeData = { 'background': 'aliceBlue', 'color': 'black', 'fontsize': '100px'};
-    this.dataService.updateData(updateThemeData);
+    this.sharedService.updateData(updateThemeData);
   }
 }
