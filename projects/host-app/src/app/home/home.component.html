@@ -1,1 +1,17 @@
 <p>home works!</p>
+
+<br>
+
+<button (click)="setLoggedInUser()">Login</button>
+<br>
+@if(loggedInUser) {
+    <p>{{loggedInUser}}</p>
+}
+
+<br><br>
+
+<button (click)="updateTheme()">UpdateTheme</button>
+<br>
+@if(themeData) {
+    <p>{{themeData | json }}</p>
+}

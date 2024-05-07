@@ -1,0 +1,20 @@
+<h1> Module Federation app </h1>
+<ol> 
+    <li> the application is working on remote app</li>
+    <li> the application data is coming from host</li>
+</ol>
+<br>
+<br>
+<br>
+<div>
+    @if(isUserLoggedIn) {
+        <p>Logged in user: {{ loggedInUser }}</p>
+        <br>
+        <button (click)="setLoggedInUser()">Login</button>
+    }
+  </div>
+  <br>
+  <br>
+  @if(themeData) {
+    <p>{{themeData | json }}</p>
+}
