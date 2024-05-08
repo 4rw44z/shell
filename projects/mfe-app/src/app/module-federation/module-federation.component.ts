@@ -23,7 +23,7 @@ export class ModuleFederationComponent implements OnInit{
   }
   checkServiceData() {
     this.subscription.add(
-      this.sharedService.themeDataAsObservable.subscribe((theme) => {
+      this.sharedService.themeDataAsObservable.subscribe((theme : any) => {
         this.themeData = theme
         console.log(theme);
       })

@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit{
     // this.subsription.add(this.dataService.themeDataAsObservable.subscribe(theme => {
     //   this.themeData = theme;
     // }))
-    this.subsription.add(this.sharedService.themeDataAsObservable.subscribe(theme => {
+    this.subsription.add(this.sharedService.themeDataAsObservable.subscribe((theme: any) => {
       this.themeData = theme;
     }))
   }
