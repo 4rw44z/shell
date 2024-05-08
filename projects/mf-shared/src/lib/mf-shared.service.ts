@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'platform'
 })
 export class MfSharedService {
   themeData: ITheme = { 'background': 'tomato', 'color': 'white', 'fontsize': '80px'};
