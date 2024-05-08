@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataService } from '../../../../host-app/src/app/services/data.service';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { MfSharedService } from 'mf-shared'
 @Component({
@@ -14,20 +13,15 @@ export class ModuleFederationComponent implements OnInit{
   loggedInUser: string = '';
   isUserLoggedIn: boolean = false;
   themeData = {};
-  private subscription = new Subscription();
-  constructor(private dataService: DataService, private sharedService: MfSharedService) {
+  observableThemeData: Observable<any> = new BehaviorSubject({});
+  constructor(private sharedService: MfSharedService) {
   }
   ngOnInit(): void {
     this.checkLoggedInUser();
     this.checkServiceData();
   }
   checkServiceData() {
-    this.subscription.add(
-      this.sharedService.themeDataAsObservable.subscribe((theme : any) => {
-        this.themeData = theme
-        console.log(theme);
-      })
-    )
+    this.observableThemeData = this.sharedService.themeDataAsObservable;
   }
   checkLoggedInUser() {
     const storedLoggedInUser = sessionStorage.getItem('loggedInUser');
@@ -42,5 +36,9 @@ export class ModuleFederationComponent implements OnInit{
     this.loggedInUser = 'Jude';
     console.log('Logged in user:', this.loggedInUser);
     sessionStorage.setItem('loggedInUser', this.loggedInUser);
+  }
+  setTheme() {
+    let updateThemeData = { 'background': 'sepia', 'color': 'black', 'fontsize': '50px'};
+    this.sharedService.updateData(updateThemeData);
   }
 }

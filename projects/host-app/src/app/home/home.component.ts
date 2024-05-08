@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { DataService } from '../services/data.service';
 import { CommonModule } from '@angular/common';
 import { MfSharedService } from 'mf-shared'
 
@@ -15,16 +14,13 @@ export class HomeComponent implements OnInit{
   loggedInUser: string = '';
   subsription = new Subscription();
   themeData = null;
-  constructor(private dataService: DataService, private sharedService: MfSharedService) {
+  constructor( private sharedService: MfSharedService) {
   }
   ngOnInit(): void {
     this.checkLoggedInUser();
     this.checkTheme();
   }
   checkTheme() {
-    // this.subsription.add(this.dataService.themeDataAsObservable.subscribe(theme => {
-    //   this.themeData = theme;
-    // }))
     this.subsription.add(this.sharedService.themeDataAsObservable.subscribe((theme: any) => {
       this.themeData = theme;
     }))
